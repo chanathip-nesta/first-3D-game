@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5q8x6kgmwtkh"]
+
+[ext_resource type="Script" uid="uid://c6qcngaamqll1" path="res://scripts/mod.gd" id="1_gki1y"]
+[ext_resource type="PackedScene" uid="uid://dlchti0ouswvn" path="res://art/Chicken.fbx" id="3_blmew"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gki1y"]
+size = Vector3(2.29108, 1.26631, 2.43967)
+
+[sub_resource type="Animation" id="Animation_gki1y"]
+resource_name = "float"
+length = 1.2
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_blmew"]
+_data = {
+&"float": SubResource("Animation_gki1y")
+}
+
+[node name="Mod" type="CharacterBody3D" groups=["mod"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_gki1y")
+max_speed = 15
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Character2" parent="Pivot" instance=ExtResource("3_blmew")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0115051, 0.330254, 0.0137876)
+shape = SubResource("BoxShape3D_gki1y")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0872109)
+aabb = AABB(-1.1707, -0.294668, -1.29285, 2.3414, 1.24266, 3.32594)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_blmew")
+}
+autoplay = "float"
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

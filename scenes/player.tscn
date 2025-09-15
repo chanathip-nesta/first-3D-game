@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://b481a061yhk2"]
+
+[ext_resource type="Script" uid="uid://msoheme6m6si" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="PackedScene" uid="uid://2hhl68og16d8" path="res://art/Bee.fbx" id="3_qhqgy"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g2els"]
+radius = 0.803319
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g2els"]
+height = 0.22168
+radius = 1.25586
+
+[sub_resource type="Animation" id="Animation_qhqgy"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_g2els"]
+resource_name = "float"
+length = 1.2
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dqkch"]
+_data = {
+&"RESET": SubResource("Animation_qhqgy"),
+&"float": SubResource("Animation_g2els")
+}
+
+[node name="Player" type="CharacterBody3D"]
+collision_mask = 6
+script = ExtResource("1_g2els")
+jump_impulse = 21
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Bee" parent="Pivot" instance=ExtResource("3_qhqgy")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0.547992, -0.0175676)
+shape = SubResource("SphereShape3D_g2els")
+
+[node name="MobDetector" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.175396)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MobDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.601601, 0)
+shape = SubResource("CylinderShape3D_g2els")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dqkch")
+}
+autoplay = "float"
+
+[connection signal="body_entered" from="MobDetector" to="." method="_on_mob_detector_body_entered"]
