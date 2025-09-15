@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bjhee5xi4bftx"
-path="res://.godot/imported/หญ้า.png-9ae29b73001306c4c96f6d18a42f5148.ctex"
+path="res://.godot/imported/หญ้า.png-67df426bbbbfa7e33bed7dfd1a78c431.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://first-3D-game/หญ้า.png"
-dest_files=["res://.godot/imported/หญ้า.png-9ae29b73001306c4c96f6d18a42f5148.ctex"]
+source_file="res://หญ้า.png"
+dest_files=["res://.godot/imported/หญ้า.png-67df426bbbbfa7e33bed7dfd1a78c431.ctex"]
 
 [params]
 
